@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: yyosefi/my-nginx-php
+  repository: yyosefi/my-nginx-php:1.0
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 1.0
+  tag: latest
 
 # imagePullSecrets:
 # - name: docker-virtual
