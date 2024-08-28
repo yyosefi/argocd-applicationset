@@ -13,15 +13,16 @@ spec:
   template:
     metadata:
       namespace: argocd
-      name: "{{path.basename}}"
+      name: "hola-{{path[1]}}-{{path[2]}}-{{path[3]}}"
     spec:
       project: default
       source:
         helm:
           valueFiles:
-            - "argocd-apps/{{path[3]}}/{{path.basename}}/configs/values.yaml"
-            - "argocd-apps/{{path[3]}}/values.yaml"
-        path: argocd-apps/{{path[3]}}/{{path.basename}}/
+            - "configs/dev/dev-values.yaml"
+            # - "argocd-apps/{{path[1]}}/{{path[2]}}/{{path[3]}}/configs/dev/values.yaml"
+            
+        path: "argocd-apps/{{path[1]}}/{{path[2]}}/{{path[3]}}"
         repoURL: https://github.com/yyosefi/argocd-applicationset.git
         targetRevision: HEAD
       syncPolicy:
