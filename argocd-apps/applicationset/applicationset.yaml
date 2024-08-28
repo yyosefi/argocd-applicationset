@@ -29,5 +29,6 @@ spec:
         automated:
           prune: true
       destination:
-        namespace: "{{path.basename}}"
+        # namespace: "{{path.basename}}"
+        namespace: "{{path[2]}}"
         server: https://kubernetes.default.svc
