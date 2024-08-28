@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: locations-appset
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/yyosefi/argocd-applicationset.git
+        revision: HEAD
+        directories:
+          - path: argocd-apps/app01/*/*
+  template:
+    metadata:
+      namespace: argocd
+      name: "{{path.basename}}"
+    spec:
+      project: default
+      source:
+        helm:
+          valueFiles:
+            - "argocd-apps/{{path[3]}}/{{path.basename}}/configs/values.yaml"
+            - "argocd-apps/{{path[3]}}/values.yaml"
+        path: argocd-apps/{{path[3]}}/{{path.basename}}/
+        repoURL: https://github.com/yyosefi/argocd-applicationset.git
+        targetRevision: HEAD
+      syncPolicy:
+        automated:
+          prune: true
+      destination:
+        namespace: "{{path.basename}}"
+        server: https://kubernetes.default.svc
