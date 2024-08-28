@@ -20,7 +20,7 @@ spec:
         helm:
           valueFiles:
             - "configs/dev/dev-values.yaml"
-            # - "argocd-apps/{{path[1]}}/{{path[2]}}/{{path[3]}}/configs/dev/values.yaml"
+            - "{{path[1]}}/{{path[2]}}/{{path[3]}}/values.yaml"
             
         path: "argocd-apps/{{path[1]}}/{{path[2]}}/{{path[3]}}"
         repoURL: https://github.com/yyosefi/argocd-applicationset.git
